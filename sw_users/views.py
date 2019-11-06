@@ -1,8 +1,10 @@
 from django.shortcuts import render
 from .forms import UserForm
 from .forms import NewUserForm
-from .models import CommonUser
+
 from django.http import HttpResponse
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate,login
 
 # Create your views here.
 
@@ -20,27 +22,20 @@ def trylogin(request):
         if form.is_valid():
             usernames = form.cleaned_data['username']
             passwords = form.cleaned_data['password']
-            try :
-                user = CommonUser.objects.get(username=usernames)
-            except :
-            	return HttpResponse('Wrong username')
-
-            pas = user.password
-            print(pas)
+            user = authenticate(username=usernames,password=passwords)
+            if user is not None:
+                login(request,user)
+                return HttpResponse('login successful')
+            else:
+                return HttpResponse('login unsuccessful') 
             # process the data in form.cleaned_data as required
             # ...
             # redirect to a new URL:
-            if pas==passwords:
-                return HttpResponse('login successful')
-            else:
-            	return HttpResponse('login unsuccessful') 
             	    
     # if a GET (or any other method) we'll create a blank form
     else:
-        form = UserForm()
-
-    return render(request, 'sw_users/name.html')
-
+        return HttpResponse('Error404')
+   
 
 def signup(request):
 	return render(request, 'sw_users/signup.html')
@@ -55,12 +50,15 @@ def trysignup(request):
             usernames = form.cleaned_data['username']
             passwords = form.cleaned_data['password']
             emails = form.cleaned_data['email']
-            names = form.cleaned_data['name']
-            if CommonUser.objects.filter(username=usernames):
-           	    return HttpResponse('Username Taken')
+            first_names = form.cleaned_data['first_name']
+            last_names = form.cleaned_data['last_name']
+            if User.objects.filter(username=usernames):
+                print("here")
+                return HttpResponse('Username Taken')
             else:
-           	    newuser = CommonUser(username=usernames,password=passwords,email=emails,name=names);
+           	    newuser = User(username=usernames,password=passwords,email=emails,first_name=first_names,last_name=last_names);
            	    newuser.save();
+           	    print("abc")
            	    return HttpResponse('Signup successful')
             
 
