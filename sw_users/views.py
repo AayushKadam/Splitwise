@@ -39,3 +39,8 @@ def trylogin(request):
         form = UserForm()
 
     return render(request, 'sw_users/name.html')
+
+
+def signup(request):
+	return render(request, 'sw_users/signup.html')
+
