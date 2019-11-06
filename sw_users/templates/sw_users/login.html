@@ -19,7 +19,7 @@
       </div>
 
       <!-- Login Form -->
-      <form action="trylogin" method="post">
+      <form autocomplete="off" action="trylogin" method="post">
       	{% csrf_token %}
         <input type="text" id="username" class="fadeIn second" name="username" placeholder="username">
         <input type="password" id="password" class="fadeIn third" name="password" placeholder="password">
