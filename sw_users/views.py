@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from .forms import UserForm
 from .forms import NewUserForm
 
@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
 
 from profilepage.models import Extendeduser
+
 # Create your views here.
 
 def index(request):
@@ -26,7 +27,7 @@ def trylogin(request):
             user = authenticate(username=usernames,password=passwords)
             if user is not None:
                 login(request,user)
-                return HttpResponse('login successful')
+                return redirect('/')
             else:
                 return HttpResponse('login unsuccessful') 
             # process the data in form.cleaned_data as required
@@ -80,4 +81,4 @@ def trysignup(request):
        
 def trylogout(request):
     logout(request)
-    return HttpResponse('logged out successfuly')
+    return redirect('/')
