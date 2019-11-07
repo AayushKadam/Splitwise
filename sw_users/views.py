@@ -4,7 +4,7 @@ from .forms import NewUserForm
 
 from django.http import HttpResponse
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate,login
+from django.contrib.auth import authenticate,login,logout
 
 from profilepage.models import Extendeduser
 # Create your views here.
@@ -78,3 +78,6 @@ def trysignup(request):
     else:
         return HttpResponse('Error404')
        
+def trylogout(request):
+    logout(request)
+    return HttpResponse('logged out successfuly')
