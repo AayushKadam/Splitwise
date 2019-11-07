@@ -6,6 +6,7 @@ from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login
 
+from profilepage.models import Extendeduser
 # Create your views here.
 
 def index(request):
@@ -50,16 +51,21 @@ def trysignup(request):
             usernames = form.cleaned_data['username']
             passwords = form.cleaned_data['password']
             emails = form.cleaned_data['email']
+            phones = form.cleaned_data['phone']
             first_names = form.cleaned_data['first_name']
             last_names = form.cleaned_data['last_name']
             if User.objects.filter(username=usernames):
                 print("here")
                 return HttpResponse('Username Taken')
             else:
-           	    newuser = User(username=usernames,password=passwords,email=emails,first_name=first_names,last_name=last_names);
-           	    newuser.save();
-           	    print("abc")
-           	    return HttpResponse('Signup successful')
+                newuser = User.objects.create_user(usernames,emails,passwords);
+                newuser.first_name=first_names
+                newuser.last_name=last_names
+                newuser.save();
+                euser = Extendeduser(user=newuser,phone_number=phones)
+                euser.save();
+                print("abc")
+                return HttpResponse('Signup successful')
             
 
             
