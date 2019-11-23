@@ -19,30 +19,43 @@
       display: inline-block;
       font-size: 16px;
     }  
+    body {margin:0;}
+
+    .icon-bar {
+      width: 100%;
+      background-color: #555;
+      overflow: auto;
+    }
+
+    .icon-bar a {
+      float: left;
+      width: 20%;
+      text-align: center;
+      padding: 12px 0;
+      transition: all 0.3s ease;
+      color: white;
+      font-size: 36px;
+    }
+
+    .icon-bar a:hover {
+      background-color: #000;
+    }
+
+    .active {
+      background-color: #111;
+    }
   </style>
 </head>
 <body>
 
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">SplitwiseClone</a>
-    </div>
-    <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Friends</a></li>
-      <li><a href="groups.html">Groups</a></li>
-      <li><a href="activity.html">Activity</a></li>     
-      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">About<span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href="#">Feedback</a></li>
-          <li><a href="login.html">Logout</a></li>
-          <li><a href="#">Reach the developers</a></li>
-        </ul>
-      </li>
-      <li style="float: right;"><a href="#">&#x20ac;</a></li>
-    </ul>
-  </div>
-</nav>
+<div class="icon-bar">
+  <a href="homepage.html"><i class="fa fa-plus"></i></a> 
+  <a class="active" href="#"><i class="fa fa-user"></i></a> 
+  <a href="groups.html"><i class="fa fa-users"></i></a> 
+  <a href="activity.html"><i class="fa fa-history"></i></a>
+  <a href="login.html"><i class="fa fa-power-off"></i></a> 
+</div>
+
 <!-- for loop for friends goes right here -->
   <div class="panel-group">
     <div class="panel panel-default">
