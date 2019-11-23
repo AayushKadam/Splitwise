@@ -2,7 +2,7 @@
 /* BASIC */
 
 html {
-  background-color: #56baed;
+  background-color: #fff;
 }
 
 body {
@@ -31,6 +31,44 @@ h2 {
 
 /* STRUCTURE */
 
+.icon-bar {
+  width: 100%;
+  background-color: #555;
+  overflow: auto;
+}
+
+.icon-bar a {
+  float: left;
+  width: 20%;
+  text-align: center;
+  padding: 12px 0;
+  transition: all 0.3s ease;
+  color: white;
+  font-size: 36px;
+}
+
+.icon-bar a:hover {
+  background-color: #000;
+}
+
+.active {
+  background-color: #111;
+}
+
+
+.button {
+  background-color: #111;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
 .wrapper {
   display: flex;
   align-items: center;
@@ -46,10 +84,10 @@ h2 {
   border-radius: 10px 10px 10px 10px;
   background: #fff;
   padding: 30px;
-  width: 90%;
-  max-width: 450px;
+  width: 100%;
+  max-width: 800px;
   position: relative;
-  padding: 0px;
+  padding: 10px;
   -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
   box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
   text-align: center;
