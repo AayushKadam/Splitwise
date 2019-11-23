@@ -119,15 +119,15 @@ body {margin:0;}
 
 
 <div class="form-style-6">
-<form>
-  <input type="text" name="field1" placeholder="Expense paid by:" />
-  <input type="text" name="field2" placeholder="Split among:" />
-  <input type="text" name="field3" placeholder="Reason:" />
+<form method="POST" action="{% url 'friends:addexpense' %}">
+  {% csrf_token %}
+  <input type="text" name="paidby" id="paidby" placeholder="Expense paid by:" />
+  <input type="text" name="split" id="split" placeholder="Split among:" />
+  <input type="number" step="0.01" name="amt" id="amt" placeholder="0.00" />
+  <input type="text" name="reason" id="reason" placeholder="Reason:" />
   <input type="submit" value="Add Expense!" />
 </form>
-<script type="text/javascript">
-  $('form').get(0).reset();
-</script>
+
 </div>
 </center>
 </body>

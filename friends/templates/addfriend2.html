@@ -6,8 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  {% load static %}
-  <link rel="stylesheet" type="text/css" href="{% static 'friends/style.css' %}">
+  <link rel="stylesheet" type="text/css" href="style.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
   <style>
@@ -38,21 +37,21 @@
 </head>
 <body>
   <div class="icon-bar">
-    <a href="#"><i class="fa fa-plus"></i></a> 
-    <a class="active" href="#"><i class="fa fa-user"></i></a> 
-    <a href="#"><i class="fa fa-users"></i></a> 
-    <a href="#"><i class="fa fa-history"></i></a>
-    <a href="#"><i class="fa fa-power-off"></i></a> 
+    <a href="homepage.html"><i class="fa fa-plus"></i></a> 
+    <a class="active" href="friends.html"><i class="fa fa-user"></i></a> 
+    <a href="groups.html"><i class="fa fa-users"></i></a> 
+    <a href="activity.html"><i class="fa fa-history"></i></a>
+    <a href="login.html"><i class="fa fa-power-off"></i></a> 
   </div>
   <div class="wrapper fadeInDown">
     <div id="formContent">
       <!-- Tabs Titles -->
 
       <!-- Add friend Form -->
-      <form autocomplete="off" action="{% url 'friends:tryadd' %}" method="post">
+      <form autocomplete="off" method="post">
         {% csrf_token %}
-        <input type="text" id="username" class="fadeIn second" name="username" placeholder="friend's name">
-        <input type="submit" class="fadeIn fourth" value="Add new Friend">
+        <input type="text" id="friendname" class="fadeIn second" name="friendname" placeholder="friend's name">
+        <a href="friends.html" class="button">Add a new friend</a>
       </form>
       <br><br>
 

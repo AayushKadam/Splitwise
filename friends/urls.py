@@ -4,6 +4,8 @@ from . import views
 
 app_name = 'friends'
 urlpatterns = [
-	path('', views.addfriend, name='addfriend'),
+	path('addfriend', views.addfriend, name='addfriend'),
 	path('tryadd', views.tryadd, name='tryadd'),
+	path('', views.showfriend, name='showfriend'),
+	path('addexpense', views.addexpense, name='addexpense'),
 ]
