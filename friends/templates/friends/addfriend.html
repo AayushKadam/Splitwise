@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Add friend</title>
+</head>
+<body>
+	<form autocomplete="off" action="{% url 'friends:tryadd' %}" method="post">
+      	{% csrf_token %}
+        <input type="text" id="username" name="username" placeholder="username">
+        <input type="submit" class="fadeIn fourth" value="Log In">
+      </form>
+</body>
+</html>
