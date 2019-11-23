@@ -4,6 +4,7 @@
   <title>SplitwiseClone</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% load static %}
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -112,7 +113,8 @@ body {margin:0;}
   <a href="friends.html"><i class="fa fa-user"></i></a> 
   <a href="groups.html"><i class="fa fa-users"></i></a> 
   <a href="activity.html"><i class="fa fa-history"></i></a>
-  <a href="login.html"><i class="fa fa-power-off"></i></a> 
+  <a href="{% url 'sw_users:trylogout' %}"><i class="fa fa-power-off"></i></a>
+  <a href="#">{{name}}</i></a> 
 </div>
 
 
