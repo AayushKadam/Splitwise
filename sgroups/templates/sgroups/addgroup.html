@@ -52,21 +52,21 @@
 </head>
 <body>
   <div class="icon-bar">
-    <a href="{% url 'profilepage:profile' %}"><i class="fa fa-plus"></i></a> 
-    <a href="{% url 'friends:friends' %}"><i class="fa fa-user"></i></a> 
-    <a class="active" href="#"><i class="fa fa-users"></i></a> 
+    <a href="{% url 'profilepage:profile' %}"><i class="fa fa-plus"></i></a>
+    <a href="#"><i class="fa fa-user"></i></a>
+    <a class="active" href="#"><i class="fa fa-users"></i></a>
     <a href="#"><i class="fa fa-history"></i></a>
-    <a href="#"><i class="fa fa-power-off"></i></a> 
+    <a href="#"><i class="fa fa-power-off"></i></a>
   </div>
   <div class="wrapper fadeInDown">
     <div id="formContent">
       <!-- Tabs Titles -->
 
       <!-- Add friend Form -->
-      <form autocomplete="off" action="{% url 'friends:tryadd' %}" method="post">
+      <form autocomplete="off" action="{% url 'sgroups:newgroup' %}" method="post">
         {% csrf_token %}
-        <input type="text" id="groupname" class="fadeIn second" name="groupname" placeholder="group's name">
-        <input type="text" id="groupmembers" class="fadeIn second" name="groupname" placeholder="members..">
+        <input type="text" id="group_name" class="fadeIn second" name="group_name" placeholder="group's name">
+        <input type="text" id="users" class="fadeIn second" name="users" placeholder="members..">
         <input type="submit" class="fadeIn fourth" value="Add new Group">
       </form>
       <br><br>
