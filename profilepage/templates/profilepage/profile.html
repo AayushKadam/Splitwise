@@ -129,7 +129,15 @@ body {margin:0;}
   <input type="text" name="split" id="split" placeholder="Split between:" />
   <input type="checkbox" name="mulsplit" onchange="myFunction1(this);" unchecked />Split unequally?<br><br>
   <input type="text" name="indamt" style="display: none;" id="indamt" value="addvalues" placeholder="Amount to be paid individually: " />
-  <input type="text" name="reason" id="reason" placeholder="Reason:" />
+  <!-- <input type="text" name="reason" id="reason" placeholder="Reason:" /> -->
+  <!-- <input type="select" name="description" id="description"> -->
+  <select>
+    <option value="Food">Food</option>
+    <option value="Travel">Travel</option>
+    <option value="Accomodation">Accomodation</option>
+    <option value="Groceries">Groceries</option>
+  </select>
+
   <!-- <input type="text" name="split" id="split" placeholder="Split among:" /> -->
   <input type="submit" value="Add Expense!" />
 </form>
