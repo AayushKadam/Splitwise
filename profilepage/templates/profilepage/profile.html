@@ -123,11 +123,11 @@ body {margin:0;}
   {% csrf_token %}
   <input type="text" name="paidby" id="paidby" placeholder="Expense paid by:" />
   <input type="number" step="0.01" name="amt" id="amt" placeholder="Total amount: " />
-  <input type="checkbox" name="check2" onchange="myFunction(this);" />Paid unequally?<br><br>
+  <input type="checkbox" name="mulpay" onchange="myFunction(this);" />Paid unequally?<br><br>
   <input type="text" name="indpaid" style="display: none;" id="indpaid" placeholder="Amount paid individually: " />
   <!-- <input type="checkbox" name="check1" onclick="myFunction(this);" />Split unequally?<br> -->
   <input type="text" name="split" id="split" placeholder="Split between:" />
-  <input type="checkbox" name="check1" onchange="myFunction1(this);" />Split unequally?<br><br>
+  <input type="checkbox" name="mulsplit" onchange="myFunction1(this);" />Split unequally?<br><br>
   <input type="text" name="indamt" style="display: none;" id="indamt" placeholder="Amount to be paid individually: " />
   <input type="text" name="reason" id="reason" placeholder="Reason:" />
   <!-- <input type="text" name="split" id="split" placeholder="Split among:" /> -->
