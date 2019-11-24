@@ -82,7 +82,7 @@
             <li class="list-group-item">{{ i }}</li>
             {% endif %}
             {% endfor %}
-            <center><a href="#" class="button">Settle Up!</a></center>
+            <center><a href="{% url 'friends:trysettle' friendi.friend2.username %}" class="button">Settle Up!</a></center>
           </ul>
     </div>
     </div>

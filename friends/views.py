@@ -7,7 +7,7 @@ from .models import dost
 from sw_users.views import index as sind
 from .transaction import final
 from activities.models import activity
-from sgroups.models import Groups
+from sgroups.models import Groups,Groupfriend,Groupmoney
 # Create your views here.
 
 def tryadd(request):
@@ -112,3 +112,36 @@ def addexpense(request):
 				print(f'Value: {value}')
 	else:
 		return HttpResponse('idk what happened')
+
+
+def trysettle(request,uname):
+	fuser = User.objects.get(username=uname)
+	friendship1 = dost.objects.get(friend1=request.user,friend2=fuser)
+	friendship2 = dost.objects.get(friend2=request.user,friend1=fuser)
+	xyz = Groups.objects.get(name="non_group")
+	ac1 = activity(friend2=request.user, friend1=fuser, exp=True, group=xyz, expense= friendship1.money)
+	ac2 = activity(friend2=fuser, friend1=request.user, exp=True, group=xyz, expense= friendship2.money)
+	friendship1.money = 0
+	friendship2.money = 0
+	friendship1.save()
+	friendship2.save()
+	ac2.save()
+	ac1.save()
+	allgroups1 = Groupfriend.objects.filter(friend1=request.user,friend2=fuser)
+	allgroups2 = Groupfriend.objects.filter(friend2=request.user,friend1=fuser)
+	for i in allgroups1:
+		x = Groupmoney.objects.get(friend=i.friend1,groups=i.groups)
+		x.money = x.money - i.money
+		x.save()
+		i.money = 0
+		i.save()
+
+	for i in allgroups2:
+		x = Groupmoney.objects.get(friend=i.friend1,groups=i.groups)
+		x.money = x.money - i.money
+		x.save()
+		i.money = 0
+		i.save()
+	
+	return redirect('/friends')
+
