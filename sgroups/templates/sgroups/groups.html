@@ -88,6 +88,19 @@
               </div>
             </li>
             {% endfor %}
+            <br>
+            ACTIVITY
+            <!-- {% for i in group.3 %} -->
+            <li class="list-group-item">
+              <div class="row">
+                <div class="col-sm-10">
+                <!-- {{i.friend2.first_name}} owes you -->
+                </div>
+                <!-- <div class="col-sm-2" style="margin-left: auto">{{i.money}}</div> -->
+              </div>
+            </li>
+            <!-- {% endfor %} -->
+            
             <center>
               <a href="#" class="button">Smart Settle Up!</a>
               <a href="{% url 'sgroups:groupexpense' group.0 %}" class="button">Add Expense</a>
