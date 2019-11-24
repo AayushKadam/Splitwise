@@ -77,9 +77,11 @@
       </div>
     <div id="{{ friendi.friend2.username }}" class="panel-collapse collapse">
           <ul class="list-group">
-            <li class="list-group-item">you owe him</li>
-            <li class="list-group-item">he owes you</li>
-            <li class="list-group-item">total owed</li>
+            {% for i in activity_list %}
+            {% if i.friend2.username == friendi.friend2.username %}
+            <li class="list-group-item">{{ i }}</li>
+            {% endif %}
+            {% endfor %}
             <center><a href="#" class="button">Settle Up!</a></center>
           </ul>
     </div>

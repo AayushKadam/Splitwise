@@ -45,7 +45,8 @@ def showfriend(request):
 	if(request.user.is_anonymous):
 		return sind(request)
 	else:
-		context = { 'friend_list' : dost.objects.filter(friend1=request.user) }
+		activities_related = [i for i in reversed(activity.objects.filter(friend1 = request.user))]
+		context = { 'friend_list' : dost.objects.filter(friend1=request.user) , 'activity_list' : activities_related }
 		return render(request,'friends/friends.html',context)
 
 def addexpense(request):
