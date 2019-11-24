@@ -6,6 +6,7 @@ from django.http import HttpResponse
 from .models import dost
 from sw_users.views import index as sind
 from .transaction import final
+from activities.models import activity
 # Create your views here.
 
 def tryadd(request):
@@ -85,6 +86,7 @@ def addexpense(request):
 			dep = final(upaid,paid,usplit,splits)
 			for i in dep:
 				qs = dost.objects.filter(friend1=i[0],friend2=i[1])
+				ac1 = activity(friend1=i[0], friend2=i[1], exp=True, group="non-group", expense= i[2])
 				if qs.exists():
 					f = dost.objects.get(friend1=i[0],friend2=i[1])
 					f.money = round(float(f.money)+i[2],2)
@@ -101,6 +103,6 @@ def addexpense(request):
 		else:
 			for key, value in request.POST.items():
 				print(f'Key: {key}')
-				print(f'Value: {value}')	
+				print(f'Value: {value}')
 	else:
 		return HttpResponse('idk what happened')
