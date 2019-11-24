@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'sgroups.apps.SgroupsConfig',
     'friends.apps.FriendsConfig',
     'profilepage.apps.ProfilepageConfig',
     'sw_users.apps.SwUsersConfig',
