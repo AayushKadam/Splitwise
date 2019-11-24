@@ -9,4 +9,5 @@ urlpatterns = [
 	path('newgroup', views.newgroup, name='newgroup'),
 	path('addexp/<int:gid>/', views.groupexpense, name='groupexpense'),
 	path('tryexp/<int:gid>/', views.trygroupexpense, name='trygroupexpense'),
+	path('trysettle/<int:gid>/', views.trysmartsettle, name='trysmartsettle'),
 ]

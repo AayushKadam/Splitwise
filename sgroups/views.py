@@ -7,6 +7,7 @@ from friends.forms import Addexpense
 from .transaction import final
 from friends.models import dost
 from activities.models import activity
+from .smartsettle import smartsettle
 # Create your views here.
 
 
@@ -17,6 +18,7 @@ def showgroup(request):
 		yyy = Groupfriend.objects.filter(friend1 = request.user , groups = i.groups)
 		activity_list = [str(i) for i in activity.objects.filter(friend1 = request.user, group = i.groups)]
 		group_list.append([i.groups.id,i.groups.name,i.money,yyy,reversed(activity_list)])
+
 	context = {'group_list' : group_list}
 
 	return render(request,'sgroups/groups.html',context)
@@ -42,6 +44,22 @@ def newgroup(request):
 			for i in users:
 				gma = Groupmoney(groups=ng,friend=i)
 				gma.save()
+
+			for i in users:
+				for j in users:
+					if i != j:
+						y = Groupfriend(friend1=i,friend2=j,money=0,groups=ng)
+						# z = Groupfriend(friend2=i,friend1=j,money=0,groups=ng)
+						y.save()
+						# z.save()
+						qs = dost.objects.filter(friend1=i,friend2=j)
+						if not (qs.exists()):
+							y = dost(friend1=i,friend2=j,money=0)
+							z = dost(friend2=i,friend1=j,money=0)
+							y.save()
+							z.save()	
+
+
 			return redirect('/sgroups')
 		else:
 			return HttpResponse("form invalid")
@@ -135,7 +153,7 @@ def trygroupexpense(request,gid):
 					z = Groupfriend(friend2=i[0],friend1=i[1],money=-i[2],groups=gg)
 					y.save()
 					z.save()
-
+				
 			return redirect('/sgroups')
 		else:
 			for key, value in request.POST.items():
@@ -143,3 +161,83 @@ def trygroupexpense(request,gid):
 				print(f'Value: {value}')
 	else:
 		return HttpResponse('idk what happened')
+
+
+def trysmartsettle(request,gid):
+	papa = Groups.objects.get(id=gid) 
+	xyz = Groupmoney.objects.filter(groups=papa)
+	upaid = []
+	paid = []
+	usplit  = []
+	splits = []
+	for i in xyz:
+		if i.money>0:
+			upaid.append(i.friend)
+			paid.append(i.money)
+		elif i.money<0:
+			usplit.append(i.friend)
+			splits.append(-i.money)
+	print(upaid)
+	print(usplit)
+	xyz = Groups.objects.get(id=gid)
+	setl =  smartsettle(upaid,paid,usplit,splits)
+	print(setl)
+	for i in setl:
+		xxx = Groupfriend.objects.get(friend1=i[0],friend2=i[1],groups=xyz)
+		ffa = xxx.money
+		xxx.money = i[2]
+		ship = dost.objects.get(friend1=i[0],friend2=i[1])
+		# print(ship.money)
+		ship.money = ship.money-ffa+xxx.money
+		ship.save()
+		print(ship.money)
+		xxx.save()
+		xxx = Groupfriend.objects.get(friend1=i[1],friend2=i[0],groups=xyz)
+		ffa = xxx.money
+		xxx.money = -i[2]
+		ship = dost.objects.get(friend1=i[1],friend2=i[0])
+		# print(ship.money)
+		ship.money = ship.money-ffa+xxx.money
+		ship.save()
+		print(ship.money)
+		xxx.save()
+
+	setli = Groupfriend.objects.filter(friend1=request.user,groups=xyz)	
+	for uuser in setli:
+		fuser = uuser.friend2
+		friendship1 = Groupfriend.objects.get(friend1=request.user,friend2=fuser,groups=xyz)
+		friendship2 = Groupfriend.objects.get(friend2=request.user,friend1=fuser,groups=xyz)
+		ac1 = activity(friend2=request.user, friend1=fuser, exp=True, group=xyz, expense= friendship1.money, reason = "settling")
+		ac2 = activity(friend2=fuser, friend1=request.user, exp=True, group=xyz, expense= friendship2.money, reason = "settling")
+		mon1 = friendship1.money #100
+		mon2 = friendship2.money #-100
+		print(mon1)
+		print(mon2)
+		friendship1.money = 0
+		friendship2.money = 0
+		fuck = Groupmoney.objects.get(friend=fuser, groups=xyz)
+		fuck.money = fuck.money-mon2
+		fuck.save()
+		friendship1.save()
+		friendship2.save()
+		ac2.save()
+		ac1.save()
+
+		friendship1 = dost.objects.get(friend1=request.user,friend2 = fuser)
+		friendship2 = dost.objects.get(friend2=request.user,friend1 = fuser)
+		print(friendship1.money)
+		print(friendship2.money)
+		friendship1.money = friendship1.money-mon1
+		friendship2.money = friendship2.money-mon2
+		friendship1.save()
+		friendship2.save()
+		
+	last = Groupmoney.objects.get(groups=xyz,friend=request.user)
+	last.money = 0
+	last.save()
+
+	return redirect('/sgroups')
+
+
+
+
