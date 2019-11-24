@@ -11,19 +11,6 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
   <style>
-    .button {
-      background-color: #111;
-      border: none;
-      color: white;
-      padding: 15px 32px;
-      text-align: center;
-      text-decoration: none;
-      display: inline-block;
-      font-size: 16px;
-      margin: 4px 2px;
-      cursor: pointer;
-    }
-    body {margin:0;}
 
     .icon-bar {
       width: 100%;
@@ -53,10 +40,10 @@
 <body>
   <div class="icon-bar">
     <a href="{% url 'profilepage:profile' %}"><i class="fa fa-plus"></i></a>
-    <a href="#"><i class="fa fa-user"></i></a>
-    <a class="active" href="#"><i class="fa fa-users"></i></a>
-    <a href="#"><i class="fa fa-history"></i></a>
-    <a href="#"><i class="fa fa-power-off"></i></a>
+    <a href="{% url 'friends:showfriend' %}"><i class="fa fa-user"></i></a>
+    <a class="active" href="{% url 'sgroups:showgroup' %}"><i class="fa fa-users"></i></a>
+    <a href="{% url 'activities:showactivity' %}"><i class="fa fa-history"></i></a>
+    <a href="{% url 'sw_users:trylogout' %}"><i class="fa fa-power-off"></i></a>
   </div>
   <div class="wrapper fadeInDown">
     <div id="formContent">
