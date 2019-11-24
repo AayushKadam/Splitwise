@@ -8,4 +8,5 @@ urlpatterns = [
 	path('tryadd', views.tryadd, name='tryadd'),
 	path('', views.showfriend, name='showfriend'),
 	path('addexpense', views.addexpense, name='addexpense'),
+	path('trysettle/<str:uname>/', views.trysettle, name='trysettle'),
 ]
