@@ -5,10 +5,8 @@ class Addfriend(forms.Form):
 
 class Addexpense(forms.Form):
 	paidby = forms.CharField(label='paidby',max_length=1000)
-	mulpay = forms.BooleanField(label='mulpay')
 	indpaid = forms.CharField(label='indpaid',max_length=1000)
 	split = forms.CharField(label='split',max_length=1000)
-	mulsplit = forms.BooleanField(label='mulsplit')
 	indamt = forms.CharField(label='indamt',max_length=1000)
-	amt =  forms.DecimalField(label='amt',decimal_places=2,max_digits=19)
+	amt =  forms.FloatField(label='amt')
 	reason = forms.CharField(label='reason',max_length=1000)
