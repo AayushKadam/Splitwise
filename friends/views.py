@@ -51,6 +51,8 @@ def addexpense(request):
 		form = Addexpense(request.POST)
 		if form.is_valid():
 			paidby = form.cleaned_data['paidby']
+			mulpay = form.cleaned_data['mulpay']
+			mulsplit = form.cleaned_data['mulsplit']
 			amt = form.cleaned_data['amt']
 			splite = form.cleaned_data['split']
 			paidby = paidby.split(', ')
@@ -68,10 +70,16 @@ def addexpense(request):
 			p = round(amt/pl,2)
 			s = round(amt/sl,2)
 			#assume equally
-			paid = []
-			for i in upaid :
-				paid.append(p)
-			splits = []
+			if mulpay :
+				paid = list(map(float,form.cleaned_data['indpaid'].split(', ')))
+			else:
+				paid = []
+				for i in upaid :
+					paid.append(p)
+			if mulsplit:
+				splits = list(map(float,form.cleaned_data['indamt'].split(', ')))
+			else:
+				splits = []
 			for i in usplit :
 				splits.append(s)
 			dep = final(upaid,paid,usplit,splits)
