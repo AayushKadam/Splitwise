@@ -110,9 +110,9 @@ body {margin:0;}
 <center>
 <div class="icon-bar">
   <a class="active" href="#"><i class="fa fa-plus"></i></a> 
-  <a href="friends.html"><i class="fa fa-user"></i></a> 
-  <a href="groups.html"><i class="fa fa-users"></i></a> 
-  <a href="activity.html"><i class="fa fa-history"></i></a>
+  <a href="friends"><i class="fa fa-user"></i></a> 
+  <a href="groups"><i class="fa fa-users"></i></a> 
+  <a href="activity"><i class="fa fa-history"></i></a>
   <a href="{% url 'sw_users:trylogout' %}"><i class="fa fa-power-off"></i></a>
   <a href="#">{{name}}</i></a> 
 </div>
@@ -122,13 +122,39 @@ body {margin:0;}
 <form method="POST" action="{% url 'friends:addexpense' %}">
   {% csrf_token %}
   <input type="text" name="paidby" id="paidby" placeholder="Expense paid by:" />
-  <input type="text" name="split" id="split" placeholder="Split among:" />
-  <input type="number" step="0.01" name="amt" id="amt" placeholder="0.00" />
+  <input type="number" step="0.01" name="amt" id="amt" placeholder="Total amount: " />
+  <input type="checkbox" name="check2" onchange="myFunction(this);" />Paid unequally?<br><br>
+  <input type="text" name="indpaid" style="display: none;" id="indpaid" placeholder="Amount paid individually: " />
+  <!-- <input type="checkbox" name="check1" onclick="myFunction(this);" />Split unequally?<br> -->
+  <input type="text" name="split" id="split" placeholder="Split between:" />
+  <input type="checkbox" name="check1" onchange="myFunction1(this);" />Split unequally?<br><br>
+  <input type="text" name="indamt" style="display: none;" id="indamt" placeholder="Amount to be paid individually: " />
   <input type="text" name="reason" id="reason" placeholder="Reason:" />
+  <!-- <input type="text" name="split" id="split" placeholder="Split among:" /> -->
   <input type="submit" value="Add Expense!" />
 </form>
 
 </div>
 </center>
+<script>
+function myFunction(cbox) {
+  var text = document.getElementById("indpaid");
+  if (cbox.checked){
+    text.style.display = "block";
+  } else {
+     text.style.display = "none";
+  }
+}
+function myFunction1(cbox) {
+  var text = document.getElementById("indamt");
+  if (cbox.checked){
+    text.style.display = "block";
+  } else {
+     text.style.display = "none";
+  }
+}
+</script>
+
+</script>
 </body>
 </html>
