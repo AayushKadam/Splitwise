@@ -6,16 +6,16 @@ from sgroups.models import Groups
 
 class activity(models.Model):
     def __str__(self):
-        if !(exp):
+        if not(self.exp) :
             return self.friend1.username+ " added " + self.friend2.username + " in " + self.group.name
         if self.group == "non-group":
             return self.friend1.username + " paid " + expense + " to " + self.friend2.username
         else:
             return self.friend1.username + " paid " + self.friend2.username + " in " + self.group.name
 
-    friend1 = models.ForeignKey(User,on_delete=models.CASCADE,related_name='friend1')
-	friend2 = models.ForeignKey(User,on_delete=models.CASCADE,related_name='friend2')
+    friend1 = models.ForeignKey(User,on_delete=models.CASCADE,related_name='fri1')
+    friend2 = models.ForeignKey(User,on_delete=models.CASCADE,related_name='fri2')
 	# friend1 gives money to friend2
-    exp = models.BooleanField(initial=False)
-    group = models.ForeignKey(Groups,on_delete=models.CASCADE,related_name='group')
-	expense = models.FloatField(decimal_places=2,default=0.0,max_digits=19)
+    exp = models.BooleanField(default=False)
+    group = models.ForeignKey(Groups,on_delete=models.CASCADE,related_name='grp')
+    expense = models.FloatField(default=0.0)
