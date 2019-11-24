@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate,login,logout
 from django.http import HttpResponse
 from .models import dost
 from sw_users.views import index as sind
+from .transaction import final
 # Create your views here.
 
 def tryadd(request):
@@ -64,25 +65,30 @@ def addexpense(request):
 
 			sl = len(usplit)
 			pl = len(upaid)
+			p = round(amt/pl,2)
+			s = round(amt/sl,2)
 			#assume equally
-			for i in usplit:
-				if i not in upaid:
-					topay = amt/(sl*pl)
-					topay = round(topay,2)
-					for j in upaid:
-						qs = dost.objects.filter(friend1=j,friend2=i)
-						if qs.exists():
-							f = dost.objects.get(friend2=i,friend1=j)
-							f.money = f.money+topay
-							f.save()
-							f = dost.objects.get(friend1=i,friend2=j)
-							f.money = f.money-topay
-							f.save()
-						else:
-							y = dost(friend1=j,friend2=i,money=topay)
-							z = dost(friend2=j,friend1=i,money=-topay)
-							y.save()
-							z.save()
+			paid = []
+			for i in upaid :
+				paid.append(p)
+			splits = []
+			for i in usplit :
+				splits.append(s)
+			dep = final(upaid,paid,usplit,splits)
+			for i in dep:
+				qs = dost.objects.filter(friend1=i[0],friend2=i[1])
+				if qs.exists():
+					f = dost.objects.get(friend1=i[0],friend2=i[1])
+					f.money = f.money+i[2]
+					f.save()
+					f = dost.objects.get(friend2=i[0],friend1=i[1])
+					f.money = f.money-i[2]
+					f.save()
+				else:
+					y = dost(friend1=i[0],friend2=i[1],money=i[2])
+					z = dost(friend2=i[0],friend1=i[1],money=-i[2])
+					y.save()
+					z.save()
 			return redirect('/friends')
 		else:
 			HttpResponse('invalid form')
