@@ -4,4 +4,5 @@ from . import views
 
 app_name = 'sgroups'
 urlpatterns = [
+	path('', views.showgroup, name='showgroup'),
 ]
