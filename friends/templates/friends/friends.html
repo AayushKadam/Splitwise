@@ -53,11 +53,11 @@
 <body>
 
 <div class="icon-bar">
-  <a href="{% url 'profilepage:profile' %}"><i class="fa fa-plus"></i></a> 
-  <a class="active" href="#"><i class="fa fa-user"></i></a> 
-  <a href="sgroups"><i class="fa fa-users"></i></a> 
-  <a href="activity.html"><i class="fa fa-history"></i></a>
-  <a href="login.html"><i class="fa fa-power-off"></i></a> 
+  <a href="{% url 'profilepage:profile' %}"><i class="fa fa-plus"></i></a>
+  <a class="active" href="#"><i class="fa fa-user"></i></a>
+  <a href="{% url 'sgroups:showgroup' %}"><i class="fa fa-users"></i></a>
+  <a href="{% url 'activities:showactivity' %}"><i class="fa fa-history"></i></a>
+  <a href="{% url 'sw_users:trylogout' %}"><i class="fa fa-power-off"></i></a>
 </div>
 
 <!-- for loop for friends goes right here -->
@@ -71,8 +71,8 @@
               <a data-toggle="collapse" href="#{{ friendi.friend2.username }}">{{ friendi.friend2.first_name }}</a>
             </div>
             <div class="col-sm-2" style="margin-left: auto">{{ friendi.money }}</div>
-          </div> 
-          
+          </div>
+
         </h4>
       </div>
     <div id="{{ friendi.friend2.username }}" class="panel-collapse collapse">
@@ -85,7 +85,7 @@
     </div>
     </div>
   </div>
- {% endfor %} 
+ {% endfor %}
 <center>
 <a href="{% url 'friends:addfriend' %}" class="button">Add a new friend</a>
 </center>

@@ -89,6 +89,8 @@ def addexpense(request):
 				qs = dost.objects.filter(friend1=i[0],friend2=i[1])
 				xyz = Groups.objects.get(name="non_group")
 				ac1 = activity(friend1=i[0], friend2=i[1], exp=True, group=xyz, expense= i[2])
+				ac2 = activity(friend1=i[1], friend2=i[0], exp=True, group=xyz, expense= -i[2])
+				ac2.save()
 				ac1.save()
 				if qs.exists():
 					f = dost.objects.get(friend1=i[0],friend2=i[1])

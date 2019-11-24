@@ -10,5 +10,6 @@ def showactivity(request):
 	if(request.user.is_anonymous):
 		return sind(request)
 	else:
-		context = { 'activity_list' : [str(i) for i in activity.objects.filter(friend1=request.user)]+[str(i) for i in activity.objects.filter(friend2=request.user)] }
+		activities_related = [str(i) for i in activity.objects.filter(friend1 = request.user)]
+		context = { 'activity_list' : reversed(activities_related) }
 		return render(request,'activities/activity.html',context)

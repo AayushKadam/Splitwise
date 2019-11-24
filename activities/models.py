@@ -8,10 +8,10 @@ class activity(models.Model):
     def __str__(self):
         if not(self.exp) :
             return self.friend1.username+ " added " + self.friend2.username + " in " + self.group.name
-        if self.group == "non-group":
-            return self.friend1.username + " paid " + expense + " to " + self.friend2.username
+        if self.expense >= 0:
+            return self.friend1.username + " paid " + str(self.expense) + " to " + self.friend2.username + " in " + self.group.name
         else:
-            return self.friend1.username + " paid " + self.friend2.username + " in " + self.group.name
+            return self.friend2.username + " paid " + str(-self.expense) + " to " + self.friend1.username + " in " + self.group.name
 
     friend1 = models.ForeignKey(User,on_delete=models.CASCADE,related_name='fri1')
     friend2 = models.ForeignKey(User,on_delete=models.CASCADE,related_name='fri2')
