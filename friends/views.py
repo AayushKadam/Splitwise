@@ -51,8 +51,6 @@ def addexpense(request):
 		form = Addexpense(request.POST)
 		if form.is_valid():
 			paidby = form.cleaned_data['paidby']
-			mulpay = form.cleaned_data['mulpay']
-			mulsplit = form.cleaned_data['mulsplit']
 			amt = form.cleaned_data['amt']
 			splite = form.cleaned_data['split']
 			paidby = paidby.split(', ')
@@ -70,27 +68,29 @@ def addexpense(request):
 			p = round(amt/pl,2)
 			s = round(amt/sl,2)
 			#assume equally
-			if mulpay :
-				paid = list(map(float,form.cleaned_data['indpaid'].split(', ')))
+			if form.cleaned_data['indpaid'] != "addvalues" :
+				fgs = form.cleaned_data['indpaid']
+				paid = list(map(float,fgs.split(', ')))
 			else:
 				paid = []
 				for i in upaid :
 					paid.append(p)
-			if mulsplit:
-				splits = list(map(float,form.cleaned_data['indamt'].split(', ')))
+			if form.cleaned_data['indamt'] != "addvalues":
+				fg = form.cleaned_data['indamt']
+				splits = list(map(float,fg.split(', ')))
 			else:
 				splits = []
-			for i in usplit :
-				splits.append(s)
+				for i in usplit :
+					splits.append(s)
 			dep = final(upaid,paid,usplit,splits)
 			for i in dep:
 				qs = dost.objects.filter(friend1=i[0],friend2=i[1])
 				if qs.exists():
 					f = dost.objects.get(friend1=i[0],friend2=i[1])
-					f.money = f.money+i[2]
+					f.money = float(f.money)+i[2]
 					f.save()
 					f = dost.objects.get(friend2=i[0],friend1=i[1])
-					f.money = f.money-i[2]
+					f.money = float(f.money)-i[2]
 					f.save()
 				else:
 					y = dost(friend1=i[0],friend2=i[1],money=i[2])
@@ -99,6 +99,8 @@ def addexpense(request):
 					z.save()
 			return redirect('/friends')
 		else:
-			HttpResponse('invalid form')
+			for key, value in request.POST.items():
+				print(f'Key: {key}')
+				print(f'Value: {value}')	
 	else:
-		HttpResponse('idk what happened')
+		return HttpResponse('idk what happened')
