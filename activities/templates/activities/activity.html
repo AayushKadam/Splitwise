@@ -40,10 +40,10 @@
 
 <div class="icon-bar">
   <a href="{% url 'profilepage:profile' %}"><i class="fa fa-plus"></i></a>
-  <a href="friends"><i class="fa fa-user"></i></a>
-  <a href="groups"><i class="fa fa-users"></i></a>
+  <a href="{% url 'friends:showfriend' %}"><i class="fa fa-user"></i></a>
+  <a href="{% url 'sgroups:showgroup' %}"><i class="fa fa-users"></i></a>
   <a class="active" href="#"><i class="fa fa-history"></i></a>
-  <a href="login"><i class="fa fa-power-off"></i></a>
+  <a href="{% url 'sw_users:trylogout' %}"><i class="fa fa-power-off"></i></a>
 </div>
 
 {% for i in activity_list %}

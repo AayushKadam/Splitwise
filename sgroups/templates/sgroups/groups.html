@@ -54,10 +54,10 @@
 
 <div class="icon-bar">
   <a href="{% url 'profilepage:profile' %}"><i class="fa fa-plus"></i></a>
-  <a href="friends"><i class="fa fa-user"></i></a>
+  <a href="{% url 'friends:showfriend' %}"><i class="fa fa-user"></i></a>
   <a class="active" href="#"><i class="fa fa-users"></i></a>
-  <a href="activity.html"><i class="fa fa-history"></i></a>
-  <a href="login.html"><i class="fa fa-power-off"></i></a>
+  <a href="{% url 'activities:showactivity' %}"><i class="fa fa-history"></i></a>
+  <a href="{% url 'sw_users:trylogout' %}"><i class="fa fa-power-off"></i></a>
 </div>
 
 <!-- for loop for friends goes right here  group_list is a list of tuples tuple-> (group_id,group_name,group_money,list(group_friends))-->
@@ -95,7 +95,7 @@
   </div>
 {% endfor %}
 
-  <a href="{% url 'groups:addgroup' %}" class="button">Add a new group</a>
+  <a href="{% url 'sgroups:addgroup' %}" class="button">Add a new group</a>
 
 </body>
 </html>
