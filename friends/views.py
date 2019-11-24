@@ -7,6 +7,7 @@ from .models import dost
 from sw_users.views import index as sind
 from .transaction import final
 from activities.models import activity
+from sgroups.models import Groups
 # Create your views here.
 
 def tryadd(request):
@@ -86,7 +87,9 @@ def addexpense(request):
 			dep = final(upaid,paid,usplit,splits)
 			for i in dep:
 				qs = dost.objects.filter(friend1=i[0],friend2=i[1])
-				ac1 = activity(friend1=i[0], friend2=i[1], exp=True, group="non-group", expense= i[2])
+				xyz = Groups.objects.get(name="non_group")
+				ac1 = activity(friend1=i[0], friend2=i[1], exp=True, group=xyz, expense= i[2])
+				ac1.save()
 				if qs.exists():
 					f = dost.objects.get(friend1=i[0],friend2=i[1])
 					f.money = round(float(f.money)+i[2],2)
