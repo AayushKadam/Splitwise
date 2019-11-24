@@ -80,17 +80,17 @@ def addexpense(request):
 				splits = list(map(float,form.cleaned_data['indamt'].split(', ')))
 			else:
 				splits = []
-			for i in usplit :
-				splits.append(s)
+				for i in usplit :
+					splits.append(s)
 			dep = final(upaid,paid,usplit,splits)
 			for i in dep:
 				qs = dost.objects.filter(friend1=i[0],friend2=i[1])
 				if qs.exists():
 					f = dost.objects.get(friend1=i[0],friend2=i[1])
-					f.money = f.money+i[2]
+					f.money = float(f.money)+i[2]
 					f.save()
 					f = dost.objects.get(friend2=i[0],friend1=i[1])
-					f.money = f.money-i[2]
+					f.money = float(f.money)-i[2]
 					f.save()
 				else:
 					y = dost(friend1=i[0],friend2=i[1],money=i[2])
@@ -99,6 +99,6 @@ def addexpense(request):
 					z.save()
 			return redirect('/friends')
 		else:
-			HttpResponse('invalid form')
+			return	HttpResponse('invalid form')
 	else:
-		HttpResponse('idk what happened')
+		return HttpResponse('idk what happened')
