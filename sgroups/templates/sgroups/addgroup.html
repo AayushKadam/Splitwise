@@ -39,8 +39,8 @@
 <body>
   <div class="icon-bar">
     <a href="#"><i class="fa fa-plus"></i></a> 
-    <a class="active" href="{% url 'friends:friends.html' %}"><i class="fa fa-user"></i></a> 
-    <a href="#"><i class="fa fa-users"></i></a> 
+    <a href="{% url 'friends:friends.html' %}"><i class="fa fa-user"></i></a> 
+    <a class="active" href="#"><i class="fa fa-users"></i></a> 
     <a href="#"><i class="fa fa-history"></i></a>
     <a href="#"><i class="fa fa-power-off"></i></a> 
   </div>
@@ -51,7 +51,8 @@
       <!-- Add friend Form -->
       <form autocomplete="off" action="{% url 'friends:tryadd' %}" method="post">
         {% csrf_token %}
-        <input type="text" id="username" class="fadeIn second" name="username" placeholder="friend's name">
+        <input type="text" id="groupname" class="fadeIn second" name="groupname" placeholder="group's name">
+        <input type="text" id="groupmembers" class="fadeIn second" name="groupname" placeholder="members..">
         <input type="submit" class="fadeIn fourth" value="Add new Friend">
       </form>
       <br><br>

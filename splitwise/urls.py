@@ -21,4 +21,6 @@ urlpatterns = [
     path('login/', include('sw_users.urls')),
     path('', include('profilepage.urls')),
     path('friends/', include('friends.urls')),
+    path('sgroups/',include('sgroups.urls')),
+    path('activity/',include('activity.urls'))
 ]
