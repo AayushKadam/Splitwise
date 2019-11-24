@@ -87,10 +87,10 @@ def addexpense(request):
 				qs = dost.objects.filter(friend1=i[0],friend2=i[1])
 				if qs.exists():
 					f = dost.objects.get(friend1=i[0],friend2=i[1])
-					f.money = float(f.money)+i[2]
+					f.money = round(float(f.money)+i[2],2)
 					f.save()
 					f = dost.objects.get(friend2=i[0],friend1=i[1])
-					f.money = float(f.money)-i[2]
+					f.money = round(float(f.money)-i[2],2)
 					f.save()
 				else:
 					y = dost(friend1=i[0],friend2=i[1],money=i[2])

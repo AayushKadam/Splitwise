@@ -22,5 +22,5 @@ class Groupmoney(models.Model):
 		return self.friend.username
 	groups = models.ForeignKey(Groups,on_delete=models.CASCADE,related_name='ggroups')
 	friend = models.ForeignKey(User,on_delete=models.CASCADE,related_name='gfriend')
-	# friend2 gives money to friend1
+	# money going in the group
 	money = models.FloatField(default=0.0)
