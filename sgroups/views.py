@@ -63,6 +63,7 @@ def trygroupexpense(request,gid):
 			paidby = form.cleaned_data['paidby']
 			amt = form.cleaned_data['amt']
 			splite = form.cleaned_data['split']
+			reason = form.cleaned_data['reason']
 			paidby = paidby.split(', ')
 			splite = splite.split(', ')
 			Gusers = Groupmoney.objects.filter(groups=gg)
@@ -99,8 +100,8 @@ def trygroupexpense(request,gid):
 			for i in dep:
 				qs = dost.objects.filter(friend1=i[0],friend2=i[1])
 				xyz = gg
-				ac1 = activity(friend1=i[0], friend2=i[1], exp=True, group=xyz, expense= i[2])
-				ac2 = activity(friend1=i[1], friend2=i[0], exp=True, group=xyz, expense= -i[2])
+				ac1 = activity(friend1=i[0], friend2=i[1], exp=True, group=xyz, expense= i[2],reason=reason)
+				ac2 = activity(friend1=i[1], friend2=i[0], exp=True, group=xyz, expense= -i[2],reason=reason)
 				ac2.save()
 				ac1.save()
 				if qs.exists():

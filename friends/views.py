@@ -55,6 +55,7 @@ def addexpense(request):
 		if form.is_valid():
 			paidby = form.cleaned_data['paidby']
 			amt = form.cleaned_data['amt']
+			reason = form.cleaned_data['reason']
 			splite = form.cleaned_data['split']
 			paidby = paidby.split(', ')
 			splite = splite.split(', ')
@@ -89,8 +90,8 @@ def addexpense(request):
 			for i in dep:
 				qs = dost.objects.filter(friend1=i[0],friend2=i[1])
 				xyz = Groups.objects.get(name="non_group")
-				ac1 = activity(friend1=i[0], friend2=i[1], exp=True, group=xyz, expense= i[2])
-				ac2 = activity(friend1=i[1], friend2=i[0], exp=True, group=xyz, expense= -i[2])
+				ac1 = activity(friend1=i[0], friend2=i[1], exp=True, group=xyz, expense= i[2], reason= reason)
+				ac2 = activity(friend1=i[1], friend2=i[0], exp=True, group=xyz, expense= -i[2],reason = reason)
 				ac2.save()
 				ac1.save()
 				if qs.exists():
@@ -119,8 +120,8 @@ def trysettle(request,uname):
 	friendship1 = dost.objects.get(friend1=request.user,friend2=fuser)
 	friendship2 = dost.objects.get(friend2=request.user,friend1=fuser)
 	xyz = Groups.objects.get(name="non_group")
-	ac1 = activity(friend2=request.user, friend1=fuser, exp=True, group=xyz, expense= friendship1.money)
-	ac2 = activity(friend2=fuser, friend1=request.user, exp=True, group=xyz, expense= friendship2.money)
+	ac1 = activity(friend2=request.user, friend1=fuser, exp=True, group=xyz, expense= friendship1.money, reason = "settling")
+	ac2 = activity(friend2=fuser, friend1=request.user, exp=True, group=xyz, expense= friendship2.money, reason = "settling")
 	friendship1.money = 0
 	friendship2.money = 0
 	friendship1.save()

@@ -10,9 +10,9 @@ class activity(models.Model):
         if not(self.exp) :
             return self.friend1.username+ " added " + self.friend2.username + " in " + self.group.name + " at time " + self.ctime.strftime("%m/%d/%Y, %H:%M:%S")
         if self.expense >= 0:
-            return self.friend1.username + " paid " + str(self.expense) + " to " + self.friend2.username + " in " + self.group.name + " at time " + self.ctime.strftime("%m/%d/%Y, %H:%M:%S")
+            return self.friend1.username + " paid " + str(self.expense) + " to " + self.friend2.username + " in " + self.group.name + " for " + self.reason + " at time " + self.ctime.strftime("%m/%d/%Y, %H:%M:%S")
         else:
-            return self.friend2.username + " paid " + str(-self.expense) + " to " + self.friend1.username + " in " + self.group.name + " at time " + self.ctime.strftime("%m/%d/%Y, %H:%M:%S")
+            return self.friend2.username + " paid " + str(-self.expense) + " to " + self.friend1.username + " in " + self.group.name + " for " + self.reason + " at time " + self.ctime.strftime("%m/%d/%Y, %H:%M:%S")
 
     friend1 = models.ForeignKey(User,on_delete=models.CASCADE,related_name='fri1')
     friend2 = models.ForeignKey(User,on_delete=models.CASCADE,related_name='fri2')
@@ -21,3 +21,4 @@ class activity(models.Model):
     group = models.ForeignKey(Groups,on_delete=models.CASCADE,related_name='grp')
     expense = models.FloatField(default=0.0)
     ctime = models.DateTimeField(auto_now_add=True)
+    reason = models.CharField(default="undocumented",max_length=1000)
