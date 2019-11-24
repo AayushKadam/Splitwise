@@ -118,7 +118,7 @@ body {margin:0;}
 
 
 <div class="form-style-6">
-<form method="POST" action="{% url 'friends:addexpense' %}">
+<form method="POST" action="{% url 'sgroups:trygroupexpense' gid %}">
   {% csrf_token %}
   {{gname}}
   <input type="text" name="paidby" id="paidby" placeholder="Expense paid by:" />
