@@ -39,26 +39,27 @@
 <body>
 
 <div class="icon-bar">
-  <a href="homepage.html"><i class="fa fa-plus"></i></a> 
-  <a href="friends.html"><i class="fa fa-user"></i></a> 
-  <a href="groups.html"><i class="fa fa-users"></i></a> 
+  <a href="homepage.html"><i class="fa fa-plus"></i></a>
+  <a href="friends.html"><i class="fa fa-user"></i></a>
+  <a href="groups.html"><i class="fa fa-users"></i></a>
   <a class="active" href="#"><i class="fa fa-history"></i></a>
-  <a href="login.html"><i class="fa fa-power-off"></i></a> 
+  <a href="login.html"><i class="fa fa-power-off"></i></a>
 </div>
 
-
+{% for i in activity_list %}
 <div class="panel-group">
   <div class="panel panel-default">
     <div class="panel-heading">
       <h4 class="panel-title">
          <div class="row">
-          <div class="col-sm-10">friend2 owes .... friend1</div>
-        </div> 
-        
+          <div class="col-sm-10">{{ i }}</div>
+        </div>
+
       </h4>
     </div>
   </div>
 </div>
+{% endfor %}
 
 </body>
 </html>

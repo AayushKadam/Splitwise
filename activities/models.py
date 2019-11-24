@@ -16,6 +16,6 @@ class activity(models.Model):
     friend1 = models.ForeignKey(User,on_delete=models.CASCADE,related_name='friend1')
 	friend2 = models.ForeignKey(User,on_delete=models.CASCADE,related_name='friend2')
 	# friend1 gives money to friend2
-    exp = models.BooleanField()
+    exp = models.BooleanField(initial=False)
     group = models.ForeignKey(Groups,on_delete=models.CASCADE,related_name='group')
-	expense = models.DecimalField(decimal_places=2,default=0.0,max_digits=19)
+	expense = models.FloatField(decimal_places=2,default=0.0,max_digits=19)
