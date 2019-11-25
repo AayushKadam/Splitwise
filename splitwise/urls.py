@@ -23,4 +23,5 @@ urlpatterns = [
     path('activities/', include('activities.urls')),
     path('friends/', include('friends.urls')),
     path('sgroups/',include('sgroups.urls')),
+    path('logout/',include('logout.urls')),
 ]

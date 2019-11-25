@@ -90,17 +90,16 @@
             {% endfor %}
             <br>
             ACTIVITY
-            <!-- {% for i in group.3 %} -->
+            {% for i in group.4 %}
             <li class="list-group-item">
               <div class="row">
                 <div class="col-sm-10">
-                <!-- {{i.friend2.first_name}} owes you -->
+                {{ i }}
                 </div>
-                <!-- <div class="col-sm-2" style="margin-left: auto">{{i.money}}</div> -->
               </div>
             </li>
-            <!-- {% endfor %} -->
-            
+            {% endfor %}
+
             <center>
               <a href="#" class="button">Smart Settle Up!</a>
               <a href="{% url 'sgroups:groupexpense' group.0 %}" class="button">Add Expense</a>
@@ -111,7 +110,7 @@
   </div>
 {% endfor %}
 
-<center>  
+<center>
   <a href="{% url 'sgroups:addgroup' %}" class="button">Add a new group</a>
 </center>
 </body>

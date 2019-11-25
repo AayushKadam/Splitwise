@@ -15,8 +15,8 @@ def showgroup(request):
 	group_list = []
 	for i in xxx:
 		yyy = Groupfriend.objects.filter(friend1 = request.user , groups = i.groups)
-		group_list.append([i.groups.id,i.groups.name,i.money,yyy])
-
+		activity_list = [str(i) for i in activity.objects.filter(friend1 = request.user, group = i.groups)]
+		group_list.append([i.groups.id,i.groups.name,i.money,yyy,reversed(activity_list)])
 	context = {'group_list' : group_list}
 
 	return render(request,'sgroups/groups.html',context)
@@ -135,7 +135,7 @@ def trygroupexpense(request,gid):
 					z = Groupfriend(friend2=i[0],friend1=i[1],money=-i[2],groups=gg)
 					y.save()
 					z.save()
-				
+
 			return redirect('/sgroups')
 		else:
 			for key, value in request.POST.items():
@@ -143,4 +143,3 @@ def trygroupexpense(request,gid):
 				print(f'Value: {value}')
 	else:
 		return HttpResponse('idk what happened')
-
