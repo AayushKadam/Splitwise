@@ -31,7 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'logout.apps.LogoutConfig'
+    'logout.apps.LogoutConfig',
     'activities.apps.ActivitiesConfig',
     'sgroups.apps.SgroupsConfig',
     'friends.apps.FriendsConfig',
