@@ -6,6 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  {% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static 'logout/style.css' %}">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
   <style>
@@ -23,7 +25,78 @@
     }
     body {margin:0;}
 
+    .form-style-6{
+      font: 120% Arial, Helvetica, sans-serif;
+      max-width: 800px;
+      margin: 10px auto;
+      padding: 16px;
+      background: #F7F7F7;
+    }
+    .form-style-6 input[type="text"],
+    .form-style-6 input[type="password"],
+    .form-style-6 input[type="date"],
+    .form-style-6 input[type="datetime"],
+    .form-style-6 input[type="email"],
+    .form-style-6 input[type="number"],
+    .form-style-6 input[type="search"],
+    .form-style-6 input[type="time"],
+    .form-style-6 input[type="url"],
+    .form-style-6 textarea,
+    .form-style-6 select
+    {
+      -webkit-transition: all 0.30s ease-in-out;
+      -moz-transition: all 0.30s ease-in-out;
+      -ms-transition: all 0.30s ease-in-out;
+      -o-transition: all 0.30s ease-in-out;
+      outline: none;
+      box-sizing: border-box;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      width: 100%;
+      background: #fff;
+      margin-bottom: 4%;
+      border: 1px solid #ccc;
+      padding: 3%;
+      color: #555;
+      font: 95% Arial, Helvetica, sans-serif;
+    }
+    .form-style-6 input[type="text"]:focus,
+    .form-style-6 input[type="password"]:focus,
+    .form-style-6 input[type="date"]:focus,
+    .form-style-6 input[type="datetime"]:focus,
+    .form-style-6 input[type="email"]:focus,
+    .form-style-6 input[type="number"]:focus,
+    .form-style-6 input[type="search"]:focus,
+    .form-style-6 input[type="time"]:focus,
+    .form-style-6 input[type="url"]:focus,
+    .form-style-6 textarea:focus,
+    .form-style-6 select:focus
+    {
+      box-shadow: 0 0 5px black;
+      padding: 3%;
+      border: 1px solid black;
+    }
 
+    .form-style-6 input[type="submit"],
+    .form-style-6 input[type="button"]{
+      box-sizing: border-box;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      width: 100%;
+      padding: 3%;
+      background: #303030;
+      border-bottom: 2px solid #303030;
+      border-top-style: none;
+      border-right-style: none;
+      border-left-style: none;
+      color: #fff;
+    }
+    .form-style-6 input[type="submit"]:hover,
+    .form-style-6 input[type="button"]:hover{
+      background: black;
+      color: white;
+    }
+    body {margin:0;}
 
     .icon-bar {
       width: 100%;
@@ -39,16 +112,7 @@
       transition: all 0.3s ease;
       color: white;
       font-size: 36px;
-    }
-
-    .icon-bar a:hover {
-      background-color: #000;
-    }
-
-    .active {
-      background-color: #111;
-    }
-  </style>
+    } </style>
 </head>
 <body>
 
@@ -73,9 +137,26 @@
 </div>
 
 <center>
-<a href="{% url 'friends:addfriend' %}" class="button">Change Password</a>
-<a href="{% url 'sw_users:trylogout' %}" class="button">Logout</a>
+<a href="#" class="button" onclick="myFunction()">Change Password</button></a>
+<div class="form-style-6" id="changePassword" style="display:none">  
+  <form>
+    <input type="password" name="newpassword" id="newpassword" placeholder="newpassword..">
+    <input type="password" name="confirmpassword" id="confirmpassword" placeholder="confirmpassword..">
+    <input type="submit" value="Go ahead" onclick= "location.href='{% url ;"/>
+  </form>
+</div> 
+<br>
+<a href="#" class="button">Logout</a>
 </center>
-
+<script>
+  function myFunction() {
+  var x = document.getElementById("changePassword");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+} 
+</script>
 </body>
 </html>
